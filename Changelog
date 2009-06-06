@@ -1,0 +1,13 @@
+2009-06-06	Shakthi Kannan <shakthimaan@gmail.com>
+	* Version 1.3
+	* Used rm -f, rm --cached raaani-mukerji.txt
+	* Arrows to connect working tree, index, HEAD in git diff
+	* Added priyaaanka-chopra box in its branch
+
+2009-06-04	Shakthi Kannan <shakthimaan@gmail.com>
+	* Version 1.2
+	* Use \textasciitilde
+
+2009-06-04	Shakthi Kannan <shakthimaan@gmail.com>
+	* Version 1.1
+	* First release!

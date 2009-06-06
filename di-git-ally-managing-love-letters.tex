@@ -1,0 +1,2208 @@
+%
+% di-git-ally managing love letters
+%
+% Copyright (C) 2009 Shakthi Kannan
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.3
+% or any later version published by the Free Software Foundation;
+% with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+% A copy of the license is included in the section entitled "GNU
+% Free Documentation License".
+%
+% E-mail: shakthimaan@gmail.com, 
+% Web: http://shakthimaan.com
+%
+
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,shapes}
+
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
+\usepackage{helvet}
+\usefonttheme{structurebold}
+
+\makeatletter
+\long\def\beamer@@frametitle[#1]#2{%
+  \beamer@ifempty{#2}{}{%
+    \gdef\insertframetitle{\centering{#2\ifnum\beamer@autobreakcount>0\relax{}
+        \space\usebeamertemplate*{frametitle continuation}\fi}}%
+  \gdef\beamer@frametitle{#2}%
+  \gdef\beamer@shortframetitle{#1}%
+}
+}
+\makeatother 
+
+\defbeamertemplate*{footline}{}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.666666\paperwidth,ht=2.25ex,dp=1ex,center]
+    {title in head/foot}%
+    \usebeamerfont{title in head/foot}\inserttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]
+    {date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertinstitute{}\hspace*{2em}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\newcommand{\bigsize}[1]{\color{red}{\fontsize{60}{60}{\textbf
+      {\selectfont #1}}}}
+\newcommand{\medsize}[1]{\fontsize{30}{30}\selectfont #1}
+
+\newcommand{\command}[1]{\textsl{\textit{#1}}}
+
+\title{di-git-ally managing love letters}
+\author{Shakthi Kannan}
+\date{May 2009}
+\institute{shakthimaan.com}
+
+\begin{document}
+
+\tikzstyle{format} = [draw, thin, fill=blue!20]
+\tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, inner sep=0pt]
+\tikzstyle{medium2} = [draw, thin, fill=green!20, inner sep=1pt, scale=0.8]
+
+%
+% titlepage
+%
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{center}
+\medsize{di-git-ally managing \\love letters}
+\end{center}
+\end{block}
+
+
+
+\begin{semiverbatim}
+                               Version 1.3
+                                 June 2009
+            GNU Free Documentation License
+                            Shakthi Kannan
+                     shakthimaan@gmail.com
+\end{semiverbatim}
+\end{frame}
+
+%
+% Warning
+%
+
+\begin{frame}[fragile]
+\frametitle{Warning}
+\begin{center}
+\medsize{The characters in the presentation are purely fictional. 
+Any reference to real life characters is merely coincidental. 
+Viewer discretion is advised.}
+\end{center}
+\end{frame}
+
+%
+% git config --global
+%
+
+\begin{frame}[fragile]
+\frametitle{git config --global}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git config --global user.name "Shakthi Kannan"}}
+\item[]{\$ \command{git config --global user.email shakthimaan@gmail.com}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{OR}
+
+\uncover<3->{\begin{block}{\textasciitilde/.gitconfig}
+\scriptsize
+\begin{tabular}{l l}
+\uncover<4->{\alert<4>{[user]} & \\
+& \alert<4>{name  = Shakthi Kannan} \\
+& \alert<4>{email = shakthimaan@gmail.com} \\}
+\uncover<5->{\alert<5>{[color]} & \\
+& \alert<5>{status = auto} \\
+& \alert<5>{branch = auto} \\
+& \alert<5>{ui = auto} \\}
+\uncover<6->{\alert<6>{[alias]} & \\
+& \alert<6>{gl = "log --graph --pretty=oneline --abbrev-commit"} \\}
+\end{tabular}
+\end{block}}
+
+\end{frame}
+
+%
+% git init
+%
+
+\begin{frame}[fragile]
+\frametitle{git init}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{mkdir love-letters}}
+\item[]{\$ \command{cd love-letters}}
+
+\item[]{\$ \command{git init}}
+\item[]{Initialized empty Git repository in /tmp/love-letters/.git/}
+
+\item[]{\$ \command{touch to-my-dearest.txt}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-5);
+    \path node [format] (working tree) {working tree};
+    \path<3-> node [format, right of=working tree] (index) {\alert<3>{index}};
+    \path<3-> node [format, right of=index] (repository) 
+              {\alert<3>{repository}};
+    \path<5-> node [below of=working tree, node distance=1cm] 
+              (to-my-dearest.txt) {\alert<5>{to-my-dearest.txt}};
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git init (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git init (2)}
+
+\alert<1>{Edit to-my-dearest.txt.}
+
+\uncover<2->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{\$ \command{git add .}}} \newline
+
+\uncover<3->{\alert<3>{\$ \command{git commit -m "First commit"}}} 
+
+\uncover<4->{\alert<4>{Created initial commit 958d5ac: First commit \newline
+  1 files changed, 1 insertions(+), 0 deletions(-) \newline
+  create mode 100644 to-my-dearest.txt}} \newline
+
+\uncover<5->{\alert<5>{\$ \command{git status}}} \newline
+\uncover<6->{\alert<6>{\# On branch master \newline
+nothing to commit (working directory clean)}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-5);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->]<2> node [medium, below of=index, node distance=1cm] 
+                 (to-my-dearest-index) {object refs} 
+                 (to-my-dearest) edge node {add} (to-my-dearest-index);
+    \path[->]<3-> node [medium, below of=repository, node distance=1cm] 
+                  (to-my-dearest-commit) {958d5ac...}
+                  (to-my-dearest-index) edge node {commit} 
+                  (to-my-dearest-commit);
+    \path[->]<3-> node [medium, right of=to-my-dearest-commit, 
+                  node distance=3cm] (master) {master}
+                  (master) edge node {} (to-my-dearest-commit);
+    \path[->]<3-> node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git show
+%
+
+\begin{frame}[fragile]
+\frametitle{git gl}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git gl}}
+\item[]{* 958d5ac... First commit}
+
+\item[]{\$ \command{git show}}
+\item[]{commit 958d5ac512dd202b65fd7214b3ebd470561dd0ac
+Author: Shakthi Kannan <shakthimaan@gmail.com>
+Date:   Sat Apr 25 11:41:40 2009 +0530
+
+    First commit
+
+diff --git a/to-my-dearest.txt b/to-my-dearest.txt
+new file mode 100644
+index 0000000..27853ff
+ --- /dev/null
+ +++ b/to-my-dearest.txt
+@@ -0,0 +1 @@
++Dear}
+
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+nothing to commit (working directory clean)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git diff ... raaani-mukerji.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git diff}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{touch raaani-mukerji.txt}}
+
+\item[]{\$ \command{git diff}}
+\item[]{\$ \command{git diff --cached}}
+\item[]{\$ \command{git diff HEAD}}
+
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	raaani-mukerji.txt
+nothing added to commit but untracked files present (use "git add" to track)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (raaani-mukerji) {\alert<1>{raaani-mukerji.txt}};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<2>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<3>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+    \path<4>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git add ... raaani-mukerji.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git add}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git add raaani-mukerji.txt}}
+
+\item[]{\$ \command{git diff}}
+
+\item[]{\$ \command{git diff --cached}}
+\item[]{diff --git a/raaani-mukerji.txt b/raaani-mukerji.txt
+new file mode 100644
+index 0000000..e69de29}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (raaani-mukerji) {raaani-mukerji.txt};
+    \path[->] node [medium, right of=raaani-mukerji] 
+              (raaani-mukerji-index) {object refs} 
+              (raaani-mukerji) edge node {add} (raaani-mukerji-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<2>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<3-4>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git add ... raaani-mukerji.txt (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git add (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git diff HEAD}}
+\item[]{diff --git a/raaani-mukerji.txt b/raaani-mukerji.txt
+new file mode 100644
+index 0000000..e69de29}
+
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   raaani-mukerji.txt
+#}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (raaani-mukerji) {raaani-mukerji.txt};
+    \path[->] node [medium, right of=raaani-mukerji] 
+              (raaani-mukerji-index) {object refs} 
+              (raaani-mukerji) edge node {add} (raaani-mukerji-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1-2>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% raaani-mukerji cannot date us!
+%
+
+\begin{frame}[fragile]
+\frametitle{What!}
+\medsize{\$ \command{\alert{date me}}}
+\newline \newline
+\medsize{date: invalid date 'me'}
+\newline 
+\begin{center}
+\medsize{\alert<1>{How sad!}}
+\end{center}
+\end{frame}
+
+
+%
+% git rm -f
+%
+
+\begin{frame}[fragile]
+\frametitle{git rm -f}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git rm raaani-mukerji.txt}}
+\item[]{error: 'raaani-mukerji.txt' has changes staged in the index
+(use --cached to keep the file, or -f to force removal)}
+\item[]{\$ \command{git rm -f raaani-mukerji.txt}}
+\item[]{rm 'raaani-mukerji.txt'}
+
+\item[]{\$ \command{ls}}
+\item[]{to-my-dearest.txt}
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+nothing to commit (working directory clean)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-2> node [below of=to-my-dearest, node distance=1cm] 
+          (raaani-mukerji) {raaani-mukerji.txt};
+    \path<1-2>[->] node [medium, right of=raaani-mukerji] 
+              (raaani-mukerji-index) {object refs} 
+              (raaani-mukerji) edge node {add} (raaani-mukerji-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git rm --cached ... nayantaaara.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git rm --cached}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{touch nayantaaara.txt}}
+
+\item[]{\$ \command{git add nayantaaara.txt}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\alert<3>{Just remove from staging area (index)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git rm --cached nayantaaara.txt}}} \newline
+\uncover<4->{\alert<4>{rm 'nayantaaara.txt'}} \newline
+
+\uncover<5->{\alert<6>{\$ \command{ls}}} \newline
+\uncover<6->{\alert<6>{to-my-dearest.txt nayantaaara.txt}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-> node [below of=to-my-dearest, node distance=1cm] 
+          (nayantaaara) {nayantaaara.txt};
+    \path<2>[->] node [medium, right of=nayantaaara] 
+              (nayantaaara-index) {object refs} 
+              (nayantaaara) edge node {add} (nayantaaara-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git rm --cached (2) ... nayantaaara.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git rm --cached (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git diff}}
+
+\item[]{\$ \command{git diff --cached}}
+
+\item[]{\$ \command{git diff HEAD}}
+
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	nayantaaara.txt
+nothing added to commit but untracked files present (use "git add" to track)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-5> node [below of=to-my-dearest, node distance=1cm] 
+          (nayantaaara) {nayantaaara.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<2>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+    \path<3>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% nayantaara cannot make love!
+%
+
+\begin{frame}[fragile]
+\frametitle{What!}
+\medsize{\$ \command{\alert{make love}}}
+\newline \newline
+\medsize{make: *** No rule to make target 'love'. Stop}
+\newline
+\begin{center}
+\medsize{\alert<1>{How sad!}}
+\end{center}
+\end{frame}
+
+%
+% git rm --cached (3) ... nayantaaara.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git rm --cached (3)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<1->{\alert{Didn't work out with Nayantaaara.}}
+\uncover<2->{\alert<2>{\$ \command{rm nayantaaara.txt}}} 
+
+\uncover<3->{\alert<3>{\$ \command{git status}}} 
+\uncover<4->{\alert<4>{\# On branch master 
+nothing to commit (working directory clean)
+* 958d5ac... First commit}}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1> node [below of=to-my-dearest, node distance=1cm] 
+          (nayantaaara) {nayantaaara.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset HEAD file ... aishvarya-ray.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset HEAD file}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{touch raaani-mukerji.txt}}
+\item[]{\$ \command{git add raaani-mukerji.txt}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+\uncover<3->{\alert<3>{Already rejected. Try Aishvarya-Ray!}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git mv raaani-mukerji.txt 
+      aishvarya-ray.txt}}}
+
+\uncover<4->{\alert<4>{\$ \command{git reset HEAD aishvarya-ray.txt}}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-2> node [below of=to-my-dearest, node distance=1cm] 
+          (raaani-mukerji) {\alert<1>{raaani-mukerji.txt}};
+    \path<2>[->] node [medium, right of=raaani-mukerji] 
+              (raaani-mukerji-index) {object refs} 
+              (raaani-mukerji) edge node {add} (raaani-mukerji-index);
+    \path<3-> node [below of=to-my-dearest, node distance=1cm] 
+          (aishvarya-ray) {\alert<3>{aishvarya-ray.txt}};
+    \path<3>[->] node [medium, right of=aishvarya-ray] 
+              (aishvarya-ray-index) {object refs} 
+              (aishvarya-ray) edge node {add} (aishvarya-ray-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset HEAD file ... aishvarya-ray.txt (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset HEAD file (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\alert<1>{\$ \command{git diff}}
+\uncover<2->{\alert<2>{\$ \command{git diff --cached}}} 
+\uncover<3->{\alert<3>{\$ \command{git diff HEAD}}} 
+
+\uncover<4->{\alert<4>{\$ \command{git status}}} 
+\uncover<5->{\alert<5>{\# On branch master 
+\# Untracked files: 
+\#   (use "git add <file>..." to include in what will be committed)
+\# 
+\#	aishvarya-ray.txt
+nothing added to commit but untracked files present (use "git add" to track)}}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (aishvarya-ray) {\alert<3>{aishvarya-ray.txt}};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<2>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+    \path<3>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% aishvarya-ray is married
+%
+
+\begin{frame}[fragile]
+\frametitle{What!}
+\begin{center}
+\medsize{\alert{Aishvarya Ray is married!}}
+\end{center}
+\begin{center}
+\medsize{OOPS!}
+\end{center}
+\begin{center}
+\medsize{\alert<1>{How sad!}}
+\end{center}
+\end{frame}
+
+%
+% git reset HEAD file ... aishvarya-ray.txt (3)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset HEAD file (3)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{rm aishvarya-ray.txt}}
+
+\item[]{\$ \command{ls}}
+\item[]{to-my-dearest.txt}
+
+\item[]{\$ \command{git status}}
+\item[]{# On branch master 
+nothing to commit (working directory clean)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset --soft HEAD^ ... pretty-zinta.txt
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --soft HEAD\^{}}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{touch pretty-zinta.txt}}
+
+\item[]{\$ \command{git add pretty-zinta.txt}}
+
+\item[]{\$ \command{git commit -m "Added pretty-zinta.txt"}}
+\item[]{Created commit 661bc09: Added pretty-zinta.txt
+0 files changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 pretty-zinta.txt}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-> node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {\alert<1>{pretty-zinta.txt}};
+    \path<2>[->] node [medium, right of=pretty-zinta] 
+              (pretty-zinta-index) {object refs} 
+              (pretty-zinta) edge node {add} (pretty-zinta-index);
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<3->[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (pretty-zinta-commit) {661bc09...}
+                  (pretty-zinta-index) edge node {commit} (pretty-zinta-commit);
+    \path<1-2>[->] node [medium, right of=to-my-dearest-commit, 
+                   node distance=3cm] 
+                   (master) {master}
+                   (master) edge node {} (to-my-dearest-commit);
+    \path<1-2>[->] node [medium, above of=master, node distance=1cm] 
+                   (HEAD) {HEAD}
+                   (HEAD) edge node {} (master);
+    \path<3->[->] node [medium, right of=pretty-zinta-commit, 
+                  node distance=3cm] 
+                  (master) {master}
+                  (master) edge node {} (pretty-zinta-commit);
+    \path<3->[->] node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset --soft HEAD^ ... pretty-zinta.txt (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --soft HEAD\^{} (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git gl}}
+\item[]{* 661bc09... Added pretty-zinta.txt
+* 958d5ac... First commit}
+
+\item[]{\$ \command{git reset --soft HEAD\^{}}}
+
+\item[]{\$ \command{git gl}}
+\item[]{* 958d5ac... First commit}
+
+\item[]{\$ \command{ls}}
+\item[]{pretty-zinta.txt to-my-dearest.txt}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-> node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<1-2>[->] node [medium, below of=to-my-dearest-commit, 
+                   node distance=1cm] 
+                   (pretty-zinta-commit) {661bc09...};
+    \path<1-2>[->] node [medium, right of=pretty-zinta-commit, 
+                   node distance=3cm] 
+                   (master) {master}
+                   (master) edge node {} (pretty-zinta-commit);
+    \path<1-2>[->] node [medium, above of=master, node distance=1cm] 
+                   (HEAD) {HEAD}
+                   (HEAD) edge node {} (master);
+    \path<3-> node [medium, right of=pretty-zinta] 
+              (pretty-zinta-index) {object refs};
+    \path<3->[->] node [medium, right of=to-my-dearest-commit, 
+                  node distance=3cm] 
+                  (master) {master}
+                  (master) edge node {} (to-my-dearest-commit);
+    \path<3->[->] node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset --soft HEAD^ ... pretty-zinta.txt (3)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --soft HEAD\^{} (3)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git diff}}
+
+\item[]{\$ \command{git diff --cached}}
+\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+new file mode 100644
+index 0000000..e69de29}
+
+\item[]{\$ \command{git diff HEAD}}
+\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+new file mode 100644
+index 0000000..e69de29}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1-> node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path node [medium, right of=pretty-zinta] 
+              (pretty-zinta-index) {object refs};
+    \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (to-my-dearest-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<2-3>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+    \path<4-5>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git reset --soft HEAD^ ... pretty-zinta.txt (4)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --soft HEAD\^{} (4)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git status}}
+\item[]{# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   pretty-zinta.txt
+#}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\alert<3>{You can remove pretty-zinta.txt:}}
+
+\uncover<3->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git reset HEAD pretty-zinta.txt}}} \newline
+\uncover<4->{\alert<4>{\$ \command{rm pretty-zinta.txt}}}
+\end{semiverbatim}
+\end{block}}
+
+\uncover<5->{\alert<5>{OR ...}}
+
+\end{frame}
+
+%
+% git reset --soft HEAD^ ... pretty-zinta.txt (5)
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --soft HEAD\^{} (5)}
+Go for it! Modify the file and commit it back:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\alert<1>{\$ \command{git commit -m "Re-added pretty-zinta.txt"}}
+\uncover<2->{\alert<2>{Created commit c66e7f1: Re-add pretty-zinta.txt 
+ 0 files changed, 0 insertions(+), 0 deletions(-) 
+ create mode 100644 pretty-zinta.txt}} 
+
+\uncover<3->{\alert<3>{\$ \command{git gl}}}
+\uncover<4->{\alert<4>{* c66e7f1... Re-add pretty-zinta.txt 
+* 958d5ac... First commit}}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
+              (pretty-zinta-commit) {c66e7f1...};
+    \path[->] node [medium, right of=pretty-zinta-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (pretty-zinta-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git commit --amend
+%
+
+\begin{frame}[fragile]
+\frametitle{git commit --amend}
+
+\alert<1>{Modify a committed message:}
+\uncover<2->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{\$ \command{git commit --amend}}} \newline
+\uncover<3->{\alert<3>{Created commit b394b44: Re-added pretty-zinta.txt 
+to repo. \newline
+ 0 files changed, 0 insertions(+), 0 deletions(-) \newline
+ create mode 100644 pretty-zinta.txt}} \newline
+
+\uncover<4->{\alert<4>{\$ \command{git gl}}} \newline
+\uncover<5->{\alert<5>{* b394b44... Re-added pretty-zinta.txt to repo. \newline
+* 958d5ac... First commit}} \newline
+
+\uncover<6->{\alert<6>{\$ \command{git status}}} \newline
+\uncover<7->{\alert<7>{\# On branch master \newline
+nothing to commit (working directory clean)}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<1>[->] node [medium, below of=to-my-dearest-commit, 
+                 node distance=1cm] 
+                 (pretty-zinta-commit) {c66e7f1...};
+    \path<2->[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (pretty-zinta-commit) {\alert<2>{b394b44...}};
+    \path[->] node [medium, right of=pretty-zinta-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (pretty-zinta-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git diff
+%
+
+\begin{frame}[fragile]
+\frametitle{git diff}
+
+Update \alert<1>{pretty-zinta.txt} with some changes.
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git diff}}
+\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+index e69de29..10e90a6 100644
+ --- a/pretty-zinta.txt
+ +++ b/pretty-zinta.txt
+@@ -0,0 +1,3 @@
++Dear Pretty:
++
++You are very pretty!}
+
+\item[]{\$ \command{git diff --cached}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {\alert<1>{pretty-zinta.txt}};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (pretty-zinta-commit) {\alert<2>{b394b44...}};
+    \path[->] node [medium, right of=pretty-zinta-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (pretty-zinta-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1-2>[<->] (working tree) edge [bend left, red] (index); % diff
+    \path<3>[<->] (index) edge [bend left, red] (HEAD);         % --cached
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git diff (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git diff (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git diff HEAD}}
+\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+index e69de29..10e90a6 100644
+ --- a/pretty-zinta.txt
+ +++ b/pretty-zinta.txt
+@@ -0,0 +1,3 @@
++Dear Pretty:
++
++You are very pretty!}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (pretty-zinta-commit) {b394b44...};
+    \path[->] node [medium, right of=pretty-zinta-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (pretty-zinta-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<1-2>[<->] (working tree) edge [bend left, red] (HEAD);  % diff HEAD
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% Cannot find pretty!
+%
+
+\begin{frame}[fragile]
+\frametitle{What!}
+\medsize{\$ \command{\alert{yum search pretty-zinta}}}
+\newline \newline 
+\medsize{No Matches found}
+\newline
+\begin{center}
+\medsize{\alert<1>{How sad!}}
+\end{center}
+\end{frame}
+
+%
+% git reset --hard HEAD^
+%
+
+\begin{frame}[fragile]
+\frametitle{git reset --hard HEAD\^{}}
+No match found. Reset!
+
+\uncover<2->{\begin{block}{}
+\begin{semiverbatim}
+\scriptsize
+\uncover<2->{\alert<2>{\$ \command{git reset --hard HEAD\^}}} \newline
+\uncover<3->{\alert<3>{HEAD is now at 958d5ac First commit}} \newline
+
+\uncover<4->{\alert<4>{\$ \command{git gl}}} \newline
+\uncover<5->{\alert<5>{* 958d5ac... First commit}} \newline
+
+\uncover<6->{\alert<6>{\$ \command{git status}}} \newline
+\uncover<7->{\alert<7>{\# On branch master \newline
+nothing to commit (working directory clean)}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path<1> node [below of=to-my-dearest, node distance=1cm] 
+          (pretty-zinta) {pretty-zinta.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<1>[->] node [medium, below of=to-my-dearest-commit, 
+                 node distance=1cm] 
+                 (pretty-zinta-commit) {b394b44...};
+    \path<1>[->] node [medium, right of=pretty-zinta-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (pretty-zinta-commit);
+    \path<1>[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \path<2->[->] node [medium, right of=to-my-dearest-commit, 
+                  node distance=3cm] 
+                  (master) {master}
+                  (master) edge node {} (to-my-dearest-commit);
+    \path<2->[->] node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git grep
+%
+
+\begin{frame}[fragile]
+\frametitle{git grep}
+
+Grep for a pattern 'dear':
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git grep dear}}
+\item[]{to-my-dearest.txt:dear}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\begin{block}{Examples}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git grep -n pattern}}} \newline
+
+\uncover<4->{\alert<4>{\$ \command{git grep --name-only pattern}}} \newline
+
+\uncover<5->{\alert<5>{\$ \command{git grep pattern v1.5.0}}} \newline
+
+\uncover<6->{\alert<6>{\$ \command{git grep -e '\#define' --and 
+-e SORT\_DIRENT}}}
+\end{semiverbatim}
+\end{block}}
+
+\end{frame}
+
+%
+% git log show
+%
+
+\begin{frame}[fragile]
+\frametitle{git-log, git-show}
+
+\begin{block}{git log}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git log -p}}
+\item[]{\$ \command{git log --stat}}
+\item[]{\$ \command{git log -5 master@\{yesterday\}}}
+\item[]{\$ \command{git log v1.1.10.. README}}
+\item[]{\$ \command{git log --since="2 weeks ago"}}
+\item[]{\$ \command{git log --before="2 weeks ago"}}
+\item[]{\$ \command{git log --author=shakthimaan --since="10 days ago"}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\begin{block}{git show}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git show v1.0.0}}
+\item[]{\$ \command{git show HEAD}}
+\item[]{\$ \command{git show HEAD^\^}}
+\item[]{\$ \command{git show master~5}}
+\item[]{\$ \command{git show master@\{May.23\}}}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git stash
+%
+
+\begin{frame}[fragile]
+\frametitle{git stash}
+Edit to-my-dearest.txt. Something else to be done, stash it!
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git stash}}
+\item[]{Saved working directory and index state "WIP on master: 958d5ac... 
+First commit"
+HEAD is now at 958d5ac First commit
+(To restore them type "git stash apply")}
+
+\item[]{\$ \command{git stash list}}
+\item[]{stash@\{0\}: WIP on master: 958d5ac... First commit}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git stash (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git stash (2)}
+Do any local changes, or commits. Reapply the stashed changes:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git stash apply}}
+\item[]{# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#
+#	modified:   to-my-dearest.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")}
+
+\item[]{\$ \command{git commit -a -m "Modified to-my-dearest.txt"}}
+\item[]{Created commit 061e345: Modified to-my-dearest.txt
+ 1 files changed, 3 insertions(+), 1 deletions(-)}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git tag
+%
+
+\begin{frame}[fragile]
+\frametitle{git tag}
+
+Create a tag named sweet:
+
+\uncover<2->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{\$ \command{git tag sweet}}} \newline
+
+\uncover<3->{\alert<3>{\$ \command{git tag}}} \newline
+\uncover<4->{\alert<4>{sweet}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
+              (stash-commit) {061e345...};
+    \path<1->[->] node [medium, right of=stash-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (stash-commit);
+    \path<1->[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \uncover<2->{\begin{scope}[yshift=-3cm,xshift=8.3cm]
+      \draw [thick, scale=0.3] (0,0) -- (1,1) -- (4,1) -- (4,-1) -- (1,-1) -- cycle node at (2.25,0) {sweet};
+      \draw[->] [thick] (0,0) -- (-2,0.8);
+    \end{scope}}
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git tag (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git tag (2)}
+
+\alert<1>{Remove a tag using -d (delete) option:}
+
+\uncover<2->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{\$ \command{git tag -d sweet}}} \newline
+\uncover<3->{\alert<3>{Deleted tag 'sweet'}} \newline
+
+\uncover<4->{\alert<4>{\$ \command{git tag}}} \newline
+\uncover<5->{\alert<5>{\$}}
+\end{semiverbatim}
+\end{block}}
+
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
+              (stash-commit) {061e345...};
+    \path[->] node [medium, right of=stash-commit, node distance=3cm] 
+              (master) {master}
+              (master) edge node {} (stash-commit);
+    \path[->] node [medium, above of=master, node distance=1cm] (HEAD) {HEAD}
+              (HEAD) edge node {} (master);
+    \uncover<1>{\begin{scope}[yshift=-3cm,xshift=8.3cm]
+      \draw [thick, scale=0.3] (0,0) -- (1,1) -- (4,1) -- (4,-1) -- (1,-1) -- cycle node at (2.25,0) {sweet};
+      \draw[->] [thick] (0,0) -- (-2,0.8);
+    \end{scope}}
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git format patch
+%
+
+\begin{frame}[fragile]
+\frametitle{git format patch}
+Create a patch for the last commit:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git-format-patch -1}}
+\item[]{0001-Modified-to-my-dearest.txt.patch}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+\uncover<3->{\alert<3>{Use git-send-email to send a collection of patches 
+by email.}}
+\end{frame}
+
+%
+% git format patch (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git format patch(2)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{cat 0001-Modified-to-my-dearest.txt.patch}}
+\item[]{From 061e345c4079bf66f5ce5bd52539346f9edcee1c Mon Sep 17 00:00:00 2001
+From: Shakthi Kannan <shakthimaan@gmail.com>
+Date: Sat, 25 Apr 2009 16:31:27 +0530
+Subject: [PATCH] Modified to-my-dearest.txt
+
+ ---
+ to-my-dearest.txt |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/to-my-dearest.txt b/to-my-dearest.txt
+index 27853ff..2e4b9d9 100644
+ --- a/to-my-dearest.txt
+ +++ b/to-my-dearest.txt
+@@ -1 +1,3 @@
+-Dear
++Dear X,
++
++You are very sweet!
+ -- 
+1.6.0.6}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git reflog
+%
+
+\begin{frame}[fragile]
+\frametitle{git reflog}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git reflog}}
+\item[]{061e345... HEAD@\{0\}: commit: Modified to-my-dearest.txt
+958d5ac... HEAD@\{1\}: HEAD^: updating HEAD
+94fafbc... HEAD@\{2\}: commit (amend): First commit.
+...}
+
+\item[]{\$ \command{git reset --hard HEAD@\{1\}}}
+\item[]{HEAD is now at 958d5ac First commit}
+
+\item[]{\$ \command{git gl}}
+\item[]{* 958d5ac... First commit}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git branch
+%
+
+\begin{frame}[fragile]
+\frametitle{git branch}
+
+Why have multiple files? Track content, not files!
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git branch}}
+\item[]{* master}
+
+\item[]{\$ \command{git branch priyaaanka-chopra}}
+
+\item[]{\$ \command{git branch}}
+\item[]{* master
+  priyaaanka-chopra}
+
+\item[]{\$ \command{git branch -d priyaaanka-chopra}}
+\item[]{Deleted branch priyaaanka-chopra.}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git branch (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git branch (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git checkout -b priyaaanka-chopra}}
+\item[]{Switched to a new branch "priyaaanka-chopra"}
+
+\item[]{\$ \command{git branch}}
+\item[]{* priyaaanka-chopra
+  master}
+
+\item[]{\$ \command{git checkout master}}
+\item[]{Switched to branch "master"}
+
+\item[]{\$ \command{git branch}}
+\item[]{  priyaaanka-chopra
+* master}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git merge
+%
+
+\begin{frame}[fragile]
+\frametitle{git merge}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git checkout priyaaanka-chopra}}
+\item[]{Switched to branch "priyaaanka-chopra"}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\alert<3>{Edit file and commit the same.}}
+
+\uncover<3->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git commit -a -m "Added very sweet"}}} 
+\newline
+\uncover<4->{\alert<4>{Created commit a63ae26: Added very sweet \newline
+ 1 files changed, 2 insertions(+), 0 deletions(-)}} \newline
+
+\uncover<5->{\alert<5>{\$ \command{git gl}}} \newline
+\uncover<6->{\alert<6>{* a63ae26... Added very sweet \newline
+* 958d5ac... First commit}}
+\end{semiverbatim}
+\end{block}}
+\command{priyaaanka-chopra branch}
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<3->[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (to-my-dearest-commit-2) {a63ae26...};
+    \path<1-2>[->] node [medium, right of=to-my-dearest-commit, 
+                   node distance=3cm] 
+                   (master) {master}
+                   (master) edge node {} (to-my-dearest-commit);
+    \path<1-2>[->] node [medium, above of=master, node distance=1cm] 
+                   (HEAD) {HEAD}
+                   (HEAD) edge node {} (master);
+    \path<3->[->] node [medium2, right of=to-my-dearest-commit-2, 
+                  node distance=3.5cm] 
+                  (priyaaanka-chopra) {priyaaanka-chopra}
+                  (priyaaanka-chopra) edge node {} (to-my-dearest-commit-2);
+    \path<3->[->] node [medium, above of=priyaaanka-chopra, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (priyaaanka-chopra);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git merge (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git merge (2)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git checkout master}}
+\item[]{Switched to branch "master"}
+
+\item[]{\$ \command{git merge priyaaanka-chopra}}
+\item[]{Updating 958d5ac..a63ae26
+Fast forward
+ to-my-dearest.txt |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)}
+
+\item[]{\$ \command{git gl}}
+\item[]{* a63ae26... Added very sweet
+* 958d5ac... First commit}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+\command{master branch}
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path<3->[->] node [medium, below of=to-my-dearest-commit, 
+                  node distance=1cm] 
+                  (to-my-dearest-commit-2) {a63ae26...};
+    \path<1-2>[->] node [medium, right of=to-my-dearest-commit, 
+                   node distance=3cm] 
+                   (master) {master}
+                   (master) edge node {} (to-my-dearest-commit);
+    \path<1-2>[->] node [medium, above of=master, node distance=1cm] 
+                   (HEAD) {HEAD}
+                   (HEAD) edge node {} (master);
+    \path<3->[->] node [medium, right of=to-my-dearest-commit-2, 
+                  node distance=3cm] 
+                  (master) {master}
+                  (master) edge node {} (to-my-dearest-commit-2);
+    \path<3->[->] node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git rebase
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase}
+
+\alert<1>{Get changes from upstream (or remote repo), or commit manually 
+to master branch:}
+
+\uncover<2->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\alert<2>{\$ \command{git commit -a -m "Added very, very sweet"}}} 
+\uncover<3->{\alert<2>{Created commit 19e0205: Added very, very sweet 
+ 1 files changed, 1 insertions(+), 1 deletions(-)}} 
+\end{semiverbatim}
+\end{block}
+
+\command{master branch}
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
+              (to-my-dearest-commit-2) {a63ae26...};
+    \path<2->[->] node [medium, below of=to-my-dearest-commit-2, 
+                  node distance=1cm] 
+                  (to-my-dearest-commit-3) {19e0205...};
+    \path<1>[->] node [medium, right of=to-my-dearest-commit-2, 
+                 node distance=3cm] 
+                 (master) {master}
+                 (master) edge node {} (to-my-dearest-commit-2);
+    \path<1>[->] node [medium, above of=master, node distance=1cm] 
+                 (HEAD) {HEAD}
+                 (HEAD) edge node {} (master);
+    \path<2->[->] node [medium, right of=to-my-dearest-commit-3, 
+                  node distance=3cm] 
+                  (master) {master}
+                  (master) edge node {} (to-my-dearest-commit-3);
+    \path<2->[->] node [medium, above of=master, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (master);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git rebase (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase (2)}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git branch}}
+\item[]{  priyaaanka-chopra
+* master}
+
+\item[]{\$ \command{git gl}}
+\item[]{* 19e0205... Added very, very sweet 
+* a63ae26... Added very sweet 
+* 958d5ac... First commit}
+
+\item[]{\$ \command{git checkout priyaaanka-chopra}}
+\item[]{Switched to branch "priyaaanka-chopra"}
+
+\item[]{\$ \command{git branch}}
+\item[]{* priyaaanka-chopra
+  master}
+
+\item[]{\$ \command{git gl}}
+\item[]{* a63ae26... Added very sweet
+* 958d5ac... First commit}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git rebase (3)
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase (3)}
+
+\alert<1>{Add your changes to priyaaanka-chopra branch and commit:}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{\$ \command{git commit -a -m "Added so, so sweet"}}} 
+\uncover<3->{\alert<3>{Created commit 1d1fd9f: Added so, so sweet
+ 1 files changed, 1 insertions(+), 1 deletions(-)}} 
+\end{semiverbatim}
+\end{block}
+
+\command{priyaaanka-chopra branch}
+\begin{figure}
+\begin{tikzpicture}[node distance=3cm, auto, >=latex', thick]
+    % We need to set at bounding box first. Otherwise the diagram
+    % will change position for each frame.
+    \path[use as bounding box] (-2,0.5) rectangle (10,-2);
+    \path node [format] (working-tree) {working tree};
+    \path node [format, right of=working-tree] (index) {index};
+    \path node [format, right of=index] (repository) {repository};
+    \path node [below of=working-tree, node distance=1cm] 
+          (to-my-dearest) {to-my-dearest.txt};
+    \path[->] node [medium, below of=repository, node distance=1cm] 
+              (to-my-dearest-commit) {958d5ac...};
+    \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
+              (to-my-dearest-commit-2) {a63ae26...};
+    \path<1>[->] node [medium2, right of=to-my-dearest-commit-2, 
+                  node distance=3.5cm] 
+                  (priyaaanka-chopra) {priyaaanka-chopra}
+                  (priyaaanka-chopra) edge node {} (to-my-dearest-commit-2);
+    \path<1>[->] node [medium, above of=priyaaanka-chopra, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (priyaaanka-chopra);
+    \path<2->[->] node [medium, below of=to-my-dearest-commit-2, 
+                  node distance=1cm] 
+                  (to-my-dearest-commit-3) {1d1fd9f...};
+    \path<2->[->] node [medium2, right of=to-my-dearest-commit-3, 
+                  node distance=3.5cm] 
+                  (priyaaanka-chopra) {priyaaanka-chopra}
+                  (priyaaanka-chopra) edge node {} (to-my-dearest-commit-3);
+    \path<2->[->] node [medium, above of=priyaaanka-chopra, node distance=1cm] 
+                  (HEAD) {HEAD}
+                  (HEAD) edge node {} (priyaaanka-chopra);
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%
+% git rebase (4) ...
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase(4)}
+Now, we have changes in master (upstream) as well as in branch. 
+We can re-write history and update the same with rebase:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git rebase master}}
+\item[]{First, rewinding head to replay your work on top of it... 
+Applying: Added so, so sweet 
+error: patch failed: to-my-dearest.txt:1 
+error: to-my-dearest.txt: patch does not apply 
+Using index info to reconstruct a base tree... 
+Falling back to patching base and 3-way merge... 
+Auto-merged to-my-dearest.txt 
+CONFLICT (content): Merge conflict in to-my-dearest.txt 
+Failed to merge in the changes. 
+Patch failed at 0001. 
+
+When you have resolved this problem run "git rebase --continue". 
+If you would prefer to skip this patch, instead run "git rebase --skip". 
+To restore the original branch and stop rebasing run "git rebase --abort".}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git rebase (5)
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase(5)}
+This is the conflict:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{Dear
+
+<<<<<<< HEAD:to-my-dearest.txt
+You are very, very sweet!
+=======
+You are so, so sweet!
+>>>>>>> Added so, so sweet:to-my-dearest.txt}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<2->{\alert<2>{We manually fix it:}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<2->{\alert<2>{Dear \newline
+
+You are very, very sweet!}}
+\end{semiverbatim}
+\end{block}}
+
+\end{frame}
+
+%
+% git rebase (6)
+%
+
+\begin{frame}[fragile]
+\frametitle{git rebase(6)}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git gl}}
+\item[]{* 1d1fd9f... Added so, so sweet
+* a63ae26... Added very sweet 
+* 958d5ac... First commit}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\alert<3>{Since, file has been modified, we need to stage it 
+(add to index):}}
+
+\uncover<3->{\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git add to-my-dearest.txt}}} \newline
+
+\uncover<4->{\alert<4>{\$ \command{git rebase --skip}}} \newline
+\uncover<5->{\alert<5>{HEAD is now at 19e0205 Added very, very sweet \newline
+Nothing to do.}} \newline
+
+\uncover<6->{\alert<6>{\$ \command{git gl}}} \newline
+\uncover<7->{\alert<7>{* 19e0205... Added very, very sweet \newline
+* a63ae26... Added very sweet \newline
+* 958d5ac... First commit}}
+\end{semiverbatim}
+\end{block}}
+
+\uncover<8->{\alert<8>{It has overwritten previous "1d1fd9f... 
+Added so, so sweet" commit on priyaaanka-chopra branch.}} 
+
+\uncover<9->{\alert<9>{Always rebase on local branches.}}
+\end{frame}
+
+%
+% git clone
+%
+
+\begin{frame}[fragile]
+\frametitle{git clone}
+
+Initial repository:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git clone git://eagain.net/gitosis.git}}
+\item[]{Initialized empty Git repository in /tmp/gitosis/.git/
+remote: Counting objects: 603, done.
+remote: Compressing objects: 100% (172/172), done.
+remote: Total 603 (delta 425), reused 597 (delta 422)
+Receiving objects: 100% (603/603), 92.87 KiB | 23 KiB/s, done.
+Resolving deltas: 100% (425/425), done.}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<3->{\alert<3>{To get updates:}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<3->{\alert<3>{\$ \command{git fetch}}}
+\end{semiverbatim}
+\end{block}}
+
+\uncover<4->{\alert<4>{To fetch and merge:}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<4->{\alert<4>{\$ \command{git pull}}}
+\end{semiverbatim}
+\end{block}}
+
+\end{frame}
+
+%
+% git clone (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git clone (2)}
+Remote repository notations:
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+  rsync://host.xz/path/to/repo.git/
+
+  http://host.xz[:port]/path/to/repo.git/
+  https://host.xz[:port]/path/to/repo.git/
+
+  git://host.xz[:port]/path/to/repo.git/
+  git://host.xz[:port]/~user/path/to/repo.git/
+
+  ssh://[user@]host.xz[:port]/path/to/repo.git/
+  ssh://[user@]host.xz/path/to/repo.git/
+  ssh://[user@]host.xz/~user/path/to/repo.git/
+  ssh://[user@]host.xz/~/path/to/repo.git
+\end{semiverbatim}
+\end{block}
+
+\end{frame}
+
+%
+% git remote
+%
+
+\begin{frame}[fragile]
+\frametitle{git remote}
+
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git clone git://192.168.1.10/demo.git}}
+\item[]{Initialized empty Git repository in /tmp/demo/.git/
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (6/6), done.}
+
+\item[]{\$ \command{git remote}}
+\item[]{origin}
+
+\item[]{\$ \command{git branch}}
+\item[]{* master}
+
+\item[]{\$ \command{git branch -r}}
+\item[]{  origin/HEAD
+  origin/master}
+\end{itemize}
+\end{semiverbatim}
+\end{block}
+
+\uncover<9->{\alert<9>{To add suryas' remote repository:}
+\begin{block}{}
+\scriptsize
+\begin{semiverbatim}
+\uncover<9->{\alert<9>{\$ \command{git remote suryas 
+gitosis@server\_name:love\_letters.git}}}
+\end{semiverbatim}
+\end{block}}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,11 @@
+README
+======
+
+To build the .pdf presentation run 'make' from this directory.
+
+Use your distro package manager to install TeX software. You will also
+require the TikZ/PGF package.
+
+--
+Shakthi Kannan
+shakthimaan@gmail.com
