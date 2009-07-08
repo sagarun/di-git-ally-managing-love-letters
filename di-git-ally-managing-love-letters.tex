@@ -81,8 +81,8 @@
 
 
 \begin{semiverbatim}
-                               Version 1.3
-                                 June 2009
+                               Version 1.4
+                                 July 2009
             GNU Free Documentation License
                             Shakthi Kannan
                      shakthimaan@gmail.com
@@ -2174,12 +2174,13 @@ Remote repository notations:
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{git clone git://192.168.1.10/demo.git}}
-\item[]{Initialized empty Git repository in /tmp/demo/.git/
-remote: Counting objects: 6, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 6 (delta 0), reused 0 (delta 0)
-Receiving objects: 100% (6/6), done.}
+\item[]{\$ \command{git clone git://gitorious.org/di-git-ally-managing-love-letters/mainline.git}}
+\item[]{Initialized empty Git repository in /tmp/mainline/.git/
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (9/9), done.
+Receiving objects: 100% (9/9), 8.72 KiB, done.
+Resolving deltas: 100% (2/2), done.
+remote: Total 9 (delta 2), reused 0 (delta 0)}
 
 \item[]{\$ \command{git remote}}
 \item[]{origin}
@@ -2194,14 +2195,48 @@ Receiving objects: 100% (6/6), done.}
 \end{semiverbatim}
 \end{block}
 
-\uncover<9->{\alert<9>{To add suryas' remote repository:}
+\end{frame}
+
+%
+% git remote (2)
+%
+
+\begin{frame}[fragile]
+\frametitle{git remote (2)}
+
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\uncover<9->{\alert<9>{\$ \command{git remote suryas 
-gitosis@server\_name:love\_letters.git}}}
+\begin{itemize}[<+-| alert@+>]
+\item[]{\$ \command{git remote add sagarun 
+    git://gitorious.org/~sagarun/di-git-ally-managing-love-letters/
+      sags-di-git-ally-managing-love-letters-clone.git}}
+
+\item[]{\$ \command{git remote}}
+\item[]{origin
+sagarun}
+
+\item[]{\$ \command{git fetch sagarun}}
+\item[]{From git://gitorious.org/~sagarun/di-git-ally-managing-love-letters/
+sags-di-git-ally-managing-love-letters-clone
+ * [new branch]      master     -> sagarun/master}
+
+\item[]{\$ \command{git branch -r}}
+\item[]{  origin/HEAD
+  origin/master
+  sagarun/master}
+
+\item[]{\$ \command{git diff master..sagarun/master}}
+\item[]{\$ \command{git checkout -b sagarun-review sagarun/master}}
+\item[]{\$ \command{git reset --hard 00359690a7283d2e9db9473df88b0e9292ed0bc7}}
+
+\item[]{      Review changes, check if they are ok.}
+\item[]{\$ \command{git checkout master}}
+\item[]{\$ \command{git merge sagarun/master}}
+\item[]{\$ \command{git push origin master}}
+\end{itemize}
 \end{semiverbatim}
-\end{block}}
+\end{block}
 
 \end{frame}
 
