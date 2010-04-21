@@ -1,7 +1,7 @@
 %
 % di-git-ally managing love letters
 %
-% Copyright (C) 2009 Shakthi Kannan
+% Copyright (C) 2009-2010 Shakthi Kannan
 %
 % Permission is granted to copy, distribute and/or modify this document
 % under the terms of the GNU Free Documentation License, Version 1.3
@@ -10,7 +10,7 @@
 % A copy of the license is included in the section entitled "GNU
 % Free Documentation License".
 %
-% E-mail: shakthimaan@gmail.com, 
+% E-mail: shakthimaan [AT] gmail dot com
 % Web: http://shakthimaan.com
 %
 
@@ -56,6 +56,11 @@
 
 \newcommand{\command}[1]{\textsl{\textit{#1}}}
 
+\newcommand{\oneactor}{pretty-zinta}
+\newcommand{\twoactor}{raaani-mukerji}
+\newcommand{\threeactor}{nayantaaara}
+\newcommand{\fouractor}{aishvarya-ray}
+
 \title{di-git-ally managing love letters}
 \author{Shakthi Kannan}
 \date{May 2009}
@@ -81,8 +86,8 @@
 
 
 \begin{semiverbatim}
-                               Version 1.5
-                                 July 2009
+                               Version 1.6
+                                April 2010
             GNU Free Documentation License
                             Shakthi Kannan
                      shakthimaan@gmail.com
@@ -269,7 +274,7 @@ nothing to commit (working directory clean)}
 \end{frame}
 
 %
-% git diff ... raaani-mukerji.txt
+% git diff ... \twoactor.txt
 %
 
 \begin{frame}[fragile]
@@ -279,7 +284,7 @@ nothing to commit (working directory clean)}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{touch raaani-mukerji.txt}}
+\item[]{\$ \command{touch \twoactor.txt}}
 
 \item[]{\$ \command{git diff}}
 \item[]{\$ \command{git diff --cached}}
@@ -290,7 +295,7 @@ nothing to commit (working directory clean)}
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
-#	raaani-mukerji.txt
+#	\twoactor.txt
 nothing added to commit but untracked files present (use "git add" to track)}
 \end{itemize}
 \end{semiverbatim}
@@ -307,7 +312,7 @@ nothing added to commit but untracked files present (use "git add" to track)}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (raaani-mukerji) {\alert<1>{raaani-mukerji.txt}};
+          (raaani-mukerji) {\alert<1>{\twoactor.txt}};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
@@ -324,7 +329,7 @@ nothing added to commit but untracked files present (use "git add" to track)}
 \end{frame}
 
 %
-% git add ... raaani-mukerji.txt
+% git add ... \twoactor.txt
 %
 
 \begin{frame}[fragile]
@@ -334,12 +339,12 @@ nothing added to commit but untracked files present (use "git add" to track)}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{git add raaani-mukerji.txt}}
+\item[]{\$ \command{git add \twoactor.txt}}
 
 \item[]{\$ \command{git diff}}
 
 \item[]{\$ \command{git diff --cached}}
-\item[]{diff --git a/raaani-mukerji.txt b/raaani-mukerji.txt
+\item[]{diff --git a/\twoactor.txt b/\twoactor.txt
 new file mode 100644
 index 0000000..e69de29}
 \end{itemize}
@@ -357,7 +362,7 @@ index 0000000..e69de29}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (raaani-mukerji) {raaani-mukerji.txt};
+          (raaani-mukerji) {\twoactor.txt};
     \path[->] node [medium, right of=raaani-mukerji] 
               (raaani-mukerji-index) {object refs} 
               (raaani-mukerji) edge node {add} (raaani-mukerji-index);
@@ -376,7 +381,7 @@ index 0000000..e69de29}
 \end{frame}
 
 %
-% git add ... raaani-mukerji.txt (2)
+% git add ... \twoactor.txt (2)
 %
 
 \begin{frame}[fragile]
@@ -387,7 +392,7 @@ index 0000000..e69de29}
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
 \item[]{\$ \command{git diff HEAD}}
-\item[]{diff --git a/raaani-mukerji.txt b/raaani-mukerji.txt
+\item[]{diff --git a/\twoactor.txt b/\twoactor.txt
 new file mode 100644
 index 0000000..e69de29}
 
@@ -396,7 +401,7 @@ index 0000000..e69de29}
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	new file:   raaani-mukerji.txt
+#	new file:   \twoactor.txt
 #}
 \end{itemize}
 \end{semiverbatim}
@@ -413,7 +418,7 @@ index 0000000..e69de29}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (raaani-mukerji) {raaani-mukerji.txt};
+          (raaani-mukerji) {\twoactor.txt};
     \path[->] node [medium, right of=raaani-mukerji] 
               (raaani-mukerji-index) {object refs} 
               (raaani-mukerji) edge node {add} (raaani-mukerji-index);
@@ -431,7 +436,7 @@ index 0000000..e69de29}
 \end{frame}
 
 %
-% raaani-mukerji cannot date us!
+% \twoactor cannot date us!
 %
 
 \begin{frame}[fragile]
@@ -456,11 +461,11 @@ index 0000000..e69de29}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{git rm raaani-mukerji.txt}}
-\item[]{error: 'raaani-mukerji.txt' has changes staged in the index
+\item[]{\$ \command{git rm \twoactor.txt}}
+\item[]{error: '\twoactor.txt' has changes staged in the index
 (use --cached to keep the file, or -f to force removal)}
-\item[]{\$ \command{git rm -f raaani-mukerji.txt}}
-\item[]{rm 'raaani-mukerji.txt'}
+\item[]{\$ \command{git rm -f \twoactor.txt}}
+\item[]{rm '\twoactor.txt'}
 
 \item[]{\$ \command{ls}}
 \item[]{to-my-dearest.txt}
@@ -482,7 +487,7 @@ nothing to commit (working directory clean)}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-2> node [below of=to-my-dearest, node distance=1cm] 
-          (raaani-mukerji) {raaani-mukerji.txt};
+          (raaani-mukerji) {\twoactor.txt};
     \path<1-2>[->] node [medium, right of=raaani-mukerji] 
               (raaani-mukerji-index) {object refs} 
               (raaani-mukerji) edge node {add} (raaani-mukerji-index);
@@ -499,7 +504,7 @@ nothing to commit (working directory clean)}
 \end{frame}
 
 %
-% git rm --cached ... nayantaaara.txt
+% git rm --cached ... \threeactor.txt
 %
 
 \begin{frame}[fragile]
@@ -509,9 +514,9 @@ nothing to commit (working directory clean)}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{touch nayantaaara.txt}}
+\item[]{\$ \command{touch \threeactor.txt}}
 
-\item[]{\$ \command{git add nayantaaara.txt}}
+\item[]{\$ \command{git add \threeactor.txt}}
 \end{itemize}
 \end{semiverbatim}
 \end{block}
@@ -521,11 +526,11 @@ nothing to commit (working directory clean)}
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\uncover<3->{\alert<3>{\$ \command{git rm --cached nayantaaara.txt}}} \newline
-\uncover<4->{\alert<4>{rm 'nayantaaara.txt'}} \newline
+\uncover<3->{\alert<3>{\$ \command{git rm --cached \threeactor.txt}}} \newline
+\uncover<4->{\alert<4>{rm '\threeactor.txt'}} \newline
 
 \uncover<5->{\alert<6>{\$ \command{ls}}} \newline
-\uncover<6->{\alert<6>{to-my-dearest.txt nayantaaara.txt}}
+\uncover<6->{\alert<6>{to-my-dearest.txt \threeactor.txt}}
 \end{semiverbatim}
 \end{block}}
 
@@ -540,7 +545,7 @@ nothing to commit (working directory clean)}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-> node [below of=to-my-dearest, node distance=1cm] 
-          (nayantaaara) {nayantaaara.txt};
+          (nayantaaara) {\threeactor.txt};
     \path<2>[->] node [medium, right of=nayantaaara] 
               (nayantaaara-index) {object refs} 
               (nayantaaara) edge node {add} (nayantaaara-index);
@@ -557,7 +562,7 @@ nothing to commit (working directory clean)}
 \end{frame}
 
 %
-% git rm --cached (2) ... nayantaaara.txt
+% git rm --cached (2) ... \threeactor.txt
 %
 
 \begin{frame}[fragile]
@@ -578,7 +583,7 @@ nothing to commit (working directory clean)}
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
-#	nayantaaara.txt
+#	\threeactor.txt
 nothing added to commit but untracked files present (use "git add" to track)}
 \end{itemize}
 \end{semiverbatim}
@@ -595,7 +600,7 @@ nothing added to commit but untracked files present (use "git add" to track)}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-5> node [below of=to-my-dearest, node distance=1cm] 
-          (nayantaaara) {nayantaaara.txt};
+          (nayantaaara) {\threeactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
@@ -627,7 +632,7 @@ nothing added to commit but untracked files present (use "git add" to track)}
 \end{frame}
 
 %
-% git rm --cached (3) ... nayantaaara.txt
+% git rm --cached (3) ... \threeactor.txt
 %
 
 \begin{frame}[fragile]
@@ -635,8 +640,8 @@ nothing added to commit but untracked files present (use "git add" to track)}
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\uncover<1->{\alert{Didn't work out with Nayantaaara.}}
-\uncover<2->{\alert<2>{\$ \command{rm nayantaaara.txt}}} 
+\uncover<1->{\alert{Didn't work out with \threeactor.}}
+\uncover<2->{\alert<2>{\$ \command{rm \threeactor.txt}}} 
 
 \uncover<3->{\alert<3>{\$ \command{git status}}} 
 \uncover<4->{\alert<4>{\# On branch master 
@@ -656,7 +661,7 @@ nothing to commit (working directory clean)
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1> node [below of=to-my-dearest, node distance=1cm] 
-          (nayantaaara) {nayantaaara.txt};
+          (nayantaaara) {\threeactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
@@ -670,7 +675,7 @@ nothing to commit (working directory clean)
 \end{frame}
 
 %
-% git reset HEAD file ... aishvarya-ray.txt
+% git reset HEAD file ... \fouractor.txt
 %
 
 \begin{frame}[fragile]
@@ -680,19 +685,19 @@ nothing to commit (working directory clean)
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{touch raaani-mukerji.txt}}
-\item[]{\$ \command{git add raaani-mukerji.txt}}
+\item[]{\$ \command{touch \twoactor.txt}}
+\item[]{\$ \command{git add \twoactor.txt}}
 \end{itemize}
 \end{semiverbatim}
 \end{block}
-\uncover<3->{\alert<3>{Already rejected. Try Aishvarya-Ray!}
+\uncover<3->{\alert<3>{Already rejected. Try \fouractor!}
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\uncover<3->{\alert<3>{\$ \command{git mv raaani-mukerji.txt 
-      aishvarya-ray.txt}}}
+\uncover<3->{\alert<3>{\$ \command{git mv \twoactor.txt 
+      \fouractor.txt}}}
 
-\uncover<4->{\alert<4>{\$ \command{git reset HEAD aishvarya-ray.txt}}}
+\uncover<4->{\alert<4>{\$ \command{git reset HEAD \fouractor.txt}}}
 \end{semiverbatim}
 \end{block}}
 
@@ -707,12 +712,12 @@ nothing to commit (working directory clean)
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-2> node [below of=to-my-dearest, node distance=1cm] 
-          (raaani-mukerji) {\alert<1>{raaani-mukerji.txt}};
+          (raaani-mukerji) {\alert<1>{\twoactor.txt}};
     \path<2>[->] node [medium, right of=raaani-mukerji] 
               (raaani-mukerji-index) {object refs} 
               (raaani-mukerji) edge node {add} (raaani-mukerji-index);
     \path<3-> node [below of=to-my-dearest, node distance=1cm] 
-          (aishvarya-ray) {\alert<3>{aishvarya-ray.txt}};
+          (aishvarya-ray) {\alert<3>{\fouractor.txt}};
     \path<3>[->] node [medium, right of=aishvarya-ray] 
               (aishvarya-ray-index) {object refs} 
               (aishvarya-ray) edge node {add} (aishvarya-ray-index);
@@ -729,7 +734,7 @@ nothing to commit (working directory clean)
 \end{frame}
 
 %
-% git reset HEAD file ... aishvarya-ray.txt (2)
+% git reset HEAD file ... \fouractor.txt (2)
 %
 
 \begin{frame}[fragile]
@@ -747,7 +752,7 @@ nothing to commit (working directory clean)
 \# Untracked files: 
 \#   (use "git add <file>..." to include in what will be committed)
 \# 
-\#	aishvarya-ray.txt
+\#	\fouractor.txt
 nothing added to commit but untracked files present (use "git add" to track)}}
 \end{semiverbatim}
 \end{block}
@@ -763,7 +768,7 @@ nothing added to commit but untracked files present (use "git add" to track)}}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (aishvarya-ray) {\alert<3>{aishvarya-ray.txt}};
+          (aishvarya-ray) {\alert<3>{\fouractor.txt}};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, right of=to-my-dearest-commit, node distance=3cm] 
@@ -780,13 +785,13 @@ nothing added to commit but untracked files present (use "git add" to track)}}
 \end{frame}
 
 %
-% aishvarya-ray is married
+% \fouractor is married
 %
 
 \begin{frame}[fragile]
 \frametitle{What!}
 \begin{center}
-\medsize{\alert{Aishvarya Ray is married!}}
+\medsize{\alert{\fouractor{} is married!}}
 \end{center}
 \begin{center}
 \medsize{OOPS!}
@@ -797,7 +802,7 @@ nothing added to commit but untracked files present (use "git add" to track)}}
 \end{frame}
 
 %
-% git reset HEAD file ... aishvarya-ray.txt (3)
+% git reset HEAD file ... \fouractor.txt (3)
 %
 
 \begin{frame}[fragile]
@@ -806,7 +811,7 @@ nothing added to commit but untracked files present (use "git add" to track)}}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{rm aishvarya-ray.txt}}
+\item[]{\$ \command{rm \fouractor.txt}}
 
 \item[]{\$ \command{ls}}
 \item[]{to-my-dearest.txt}
@@ -841,7 +846,7 @@ nothing to commit (working directory clean)}
 \end{frame}
 
 %
-% git reset --soft HEAD^ ... pretty-zinta.txt
+% git reset --soft HEAD^ ... \oneactor.txt
 %
 
 \begin{frame}[fragile]
@@ -851,14 +856,14 @@ nothing to commit (working directory clean)}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
-\item[]{\$ \command{touch pretty-zinta.txt}}
+\item[]{\$ \command{touch \oneactor.txt}}
 
-\item[]{\$ \command{git add pretty-zinta.txt}}
+\item[]{\$ \command{git add \oneactor.txt}}
 
-\item[]{\$ \command{git commit -m "Added pretty-zinta.txt"}}
-\item[]{Created commit 661bc09: Added pretty-zinta.txt
+\item[]{\$ \command{git commit -m "Added \oneactor.txt"}}
+\item[]{Created commit 661bc09: Added \oneactor.txt
 0 files changed, 0 insertions(+), 0 deletions(-)
-create mode 100644 pretty-zinta.txt}
+create mode 100644 \oneactor.txt}
 \end{itemize}
 \end{semiverbatim}
 \end{block}
@@ -874,7 +879,7 @@ create mode 100644 pretty-zinta.txt}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-> node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {\alert<1>{pretty-zinta.txt}};
+          (pretty-zinta) {\alert<1>{\oneactor.txt}};
     \path<2>[->] node [medium, right of=pretty-zinta] 
               (pretty-zinta-index) {object refs} 
               (pretty-zinta) edge node {add} (pretty-zinta-index);
@@ -904,7 +909,7 @@ create mode 100644 pretty-zinta.txt}
 \end{frame}
 
 %
-% git reset --soft HEAD^ ... pretty-zinta.txt (2)
+% git reset --soft HEAD^ ... \oneactor.txt (2)
 %
 
 \begin{frame}[fragile]
@@ -915,7 +920,7 @@ create mode 100644 pretty-zinta.txt}
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
 \item[]{\$ \command{git gl}}
-\item[]{* 661bc09... Added pretty-zinta.txt
+\item[]{* 661bc09... Added \oneactor.txt
 * 958d5ac... First commit}
 
 \item[]{\$ \command{git reset --soft HEAD\^{}}}
@@ -924,7 +929,7 @@ create mode 100644 pretty-zinta.txt}
 \item[]{* 958d5ac... First commit}
 
 \item[]{\$ \command{ls}}
-\item[]{pretty-zinta.txt to-my-dearest.txt}
+\item[]{\oneactor.txt to-my-dearest.txt}
 \end{itemize}
 \end{semiverbatim}
 \end{block}
@@ -940,7 +945,7 @@ create mode 100644 pretty-zinta.txt}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-> node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path<1-2>[->] node [medium, below of=to-my-dearest-commit, 
@@ -968,7 +973,7 @@ create mode 100644 pretty-zinta.txt}
 \end{frame}
 
 %
-% git reset --soft HEAD^ ... pretty-zinta.txt (3)
+% git reset --soft HEAD^ ... \oneactor.txt (3)
 %
 
 \begin{frame}[fragile]
@@ -981,12 +986,12 @@ create mode 100644 pretty-zinta.txt}
 \item[]{\$ \command{git diff}}
 
 \item[]{\$ \command{git diff --cached}}
-\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+\item[]{diff --git a/\oneactor.txt b/\oneactor.txt
 new file mode 100644
 index 0000000..e69de29}
 
 \item[]{\$ \command{git diff HEAD}}
-\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+\item[]{diff --git a/\oneactor.txt b/\oneactor.txt
 new file mode 100644
 index 0000000..e69de29}
 \end{itemize}
@@ -1004,7 +1009,7 @@ index 0000000..e69de29}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1-> node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path node [medium, right of=pretty-zinta] 
@@ -1023,7 +1028,7 @@ index 0000000..e69de29}
 \end{frame}
 
 %
-% git reset --soft HEAD^ ... pretty-zinta.txt (4)
+% git reset --soft HEAD^ ... \oneactor.txt (4)
 %
 
 \begin{frame}[fragile]
@@ -1037,19 +1042,19 @@ index 0000000..e69de29}
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	new file:   pretty-zinta.txt
+#	new file:   \oneactor.txt
 #}
 \end{itemize}
 \end{semiverbatim}
 \end{block}
 
-\uncover<3->{\alert<3>{You can remove pretty-zinta.txt:}}
+\uncover<3->{\alert<3>{You can remove \oneactor.txt:}}
 
 \uncover<3->{\begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\uncover<3->{\alert<3>{\$ \command{git reset HEAD pretty-zinta.txt}}} \newline
-\uncover<4->{\alert<4>{\$ \command{rm pretty-zinta.txt}}}
+\uncover<3->{\alert<3>{\$ \command{git reset HEAD \oneactor.txt}}} \newline
+\uncover<4->{\alert<4>{\$ \command{rm \oneactor.txt}}}
 \end{semiverbatim}
 \end{block}}
 
@@ -1058,7 +1063,7 @@ index 0000000..e69de29}
 \end{frame}
 
 %
-% git reset --soft HEAD^ ... pretty-zinta.txt (5)
+% git reset --soft HEAD^ ... \oneactor.txt (5)
 %
 
 \begin{frame}[fragile]
@@ -1067,13 +1072,13 @@ Go for it! Modify the file and commit it back:
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
-\alert<1>{\$ \command{git commit -m "Re-added pretty-zinta.txt"}}
-\uncover<2->{\alert<2>{Created commit c66e7f1: Re-add pretty-zinta.txt 
+\alert<1>{\$ \command{git commit -m "Re-added \oneactor.txt"}}
+\uncover<2->{\alert<2>{Created commit c66e7f1: Re-add \oneactor.txt 
  0 files changed, 0 insertions(+), 0 deletions(-) 
- create mode 100644 pretty-zinta.txt}} 
+ create mode 100644 \oneactor.txt}} 
 
 \uncover<3->{\alert<3>{\$ \command{git gl}}}
-\uncover<4->{\alert<4>{* c66e7f1... Re-add pretty-zinta.txt 
+\uncover<4->{\alert<4>{* c66e7f1... Re-add \oneactor.txt 
 * 958d5ac... First commit}}
 \end{semiverbatim}
 \end{block}
@@ -1089,7 +1094,7 @@ Go for it! Modify the file and commit it back:
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, below of=to-my-dearest-commit, node distance=1cm] 
@@ -1116,13 +1121,13 @@ Go for it! Modify the file and commit it back:
 \scriptsize
 \begin{semiverbatim}
 \uncover<2->{\alert<2>{\$ \command{git commit --amend}}} \newline
-\uncover<3->{\alert<3>{Created commit b394b44: Re-added pretty-zinta.txt 
+\uncover<3->{\alert<3>{Created commit b394b44: Re-added \oneactor.txt 
 to repo. \newline
  0 files changed, 0 insertions(+), 0 deletions(-) \newline
- create mode 100644 pretty-zinta.txt}} \newline
+ create mode 100644 \oneactor.txt}} \newline
 
 \uncover<4->{\alert<4>{\$ \command{git gl}}} \newline
-\uncover<5->{\alert<5>{* b394b44... Re-added pretty-zinta.txt to repo. \newline
+\uncover<5->{\alert<5>{* b394b44... Re-added \oneactor.txt to repo. \newline
 * 958d5ac... First commit}} \newline
 
 \uncover<6->{\alert<6>{\$ \command{git status}}} \newline
@@ -1142,7 +1147,7 @@ nothing to commit (working directory clean)}}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path<1>[->] node [medium, below of=to-my-dearest-commit, 
@@ -1168,17 +1173,17 @@ nothing to commit (working directory clean)}}
 \begin{frame}[fragile]
 \frametitle{git diff}
 
-Update \alert<1>{pretty-zinta.txt} with some changes.
+Update \alert<1>{\oneactor.txt} with some changes.
 
 \begin{block}{}
 \scriptsize
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
 \item[]{\$ \command{git diff}}
-\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+\item[]{diff --git a/\oneactor.txt b/\oneactor.txt
 index e69de29..10e90a6 100644
- --- a/pretty-zinta.txt
- +++ b/pretty-zinta.txt
+ --- a/\oneactor.txt
+ +++ b/\oneactor.txt
 @@ -0,0 +1,3 @@
 +Dear Pretty:
 +
@@ -1200,7 +1205,7 @@ index e69de29..10e90a6 100644
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {\alert<1>{pretty-zinta.txt}};
+          (pretty-zinta) {\alert<1>{\oneactor.txt}};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, below of=to-my-dearest-commit, 
@@ -1230,10 +1235,10 @@ index e69de29..10e90a6 100644
 \begin{semiverbatim}
 \begin{itemize}[<+-| alert@+>]
 \item[]{\$ \command{git diff HEAD}}
-\item[]{diff --git a/pretty-zinta.txt b/pretty-zinta.txt
+\item[]{diff --git a/\oneactor.txt b/\oneactor.txt
 index e69de29..10e90a6 100644
- --- a/pretty-zinta.txt
- +++ b/pretty-zinta.txt
+ --- a/\oneactor.txt
+ +++ b/\oneactor.txt
 @@ -0,0 +1,3 @@
 +Dear Pretty:
 +
@@ -1253,7 +1258,7 @@ index e69de29..10e90a6 100644
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path[->] node [medium, below of=to-my-dearest-commit, 
@@ -1276,7 +1281,7 @@ index e69de29..10e90a6 100644
 
 \begin{frame}[fragile]
 \frametitle{What!}
-\medsize{\$ \command{\alert{yum search pretty-zinta}}}
+\medsize{\$ \command{\alert{yum search \oneactor}}}
 \newline \newline 
 \medsize{No Matches found}
 \newline
@@ -1319,7 +1324,7 @@ nothing to commit (working directory clean)}}
     \path node [below of=working-tree, node distance=1cm] 
           (to-my-dearest) {to-my-dearest.txt};
     \path<1> node [below of=to-my-dearest, node distance=1cm] 
-          (pretty-zinta) {pretty-zinta.txt};
+          (pretty-zinta) {\oneactor.txt};
     \path[->] node [medium, below of=repository, node distance=1cm] 
               (to-my-dearest-commit) {958d5ac...};
     \path<1>[->] node [medium, below of=to-my-dearest-commit, 
