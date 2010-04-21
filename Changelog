@@ -1,3 +1,7 @@
+2010-04-21      Shakthi Kannan <shakthimaan@gmail.com>
+	* Version 1.6
+	* Used \newcommand for four actors for name abstraction
+
 2009-07-08	Shakthi Kannan <shakthimaan@gmail.com>
 	* Version 1.5
 	* Fixed git clone usage in git remote slide
